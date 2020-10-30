@@ -24,7 +24,7 @@ void RGBstrip::init(unsigned char _pinR, unsigned char _pinG, unsigned char _pin
   brightness = 100;
   on = 0;
   hsv2rgb(hue, saturation, brightness, &red, &green, &blue);
-  Serial.printf("red=%d, green=%d, blue=%d\n", red, green, blue);
+  // Serial.printf("red=%d, green=%d, blue=%d\n", red, green, blue);
   check();
 }
 
@@ -128,12 +128,12 @@ unsigned int RGBstrip::scale8to10bit(unsigned int in)
   return round(in*1023.0/255.0);
 }
 
-void RGBstrip::set_on(bool _on)
+void RGBstrip::set_on(unsigned int _on)
 {
-  if (_on)
-    on = 1;
+  if (_on==0)
+    on = 0;
   else
-    on=0;
+    on = 1;
 }
 
 void RGBstrip::set_hue(unsigned int _hue)
@@ -198,9 +198,40 @@ void RGBstrip::set_hsv(unsigned int _hue, unsigned int _saturation, unsigned int
   set_brightness(_brightness);
 }
 
+unsigned int RGBstrip::get_on()
+{
+  return on;
+}
+
+unsigned int RGBstrip::invert_on()
+{
+  Serial.printf("invert_on:\non=%d --> ",get_on());
+  if (get_on()==0)
+    set_on(1);
+  else
+    set_on(0);
+  Serial.printf("%d\n",get_on());
+  return get_on();
+}
+
+unsigned int RGBstrip::get_hue()
+{
+  return hue;
+}
+
+unsigned int RGBstrip::get_saturation()
+{
+  return saturation;
+}
+
+unsigned int RGBstrip::get_brightness()
+{
+  return brightness;
+}
+
 void RGBstrip::check()
 {
-  Serial.printf("R: %d  G: %d  B: %d  (H: %d  S: %d  V: %d)\n", red, green, blue, hue, saturation, brightness);
+  // Serial.printf("R: %d  G: %d  B: %d  (H: %d  S: %d  V: %d)\n", red, green, blue, hue, saturation, brightness);
   if (active_low)
   {
     analogWrite(pinR, 1023-on*scale8to10bit(red));

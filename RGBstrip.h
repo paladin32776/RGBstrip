@@ -18,7 +18,7 @@ class RGBstrip
     RGBstrip(unsigned char _pinR, unsigned char _pinG, unsigned char _pinB);
     RGBstrip(unsigned char _pinR, unsigned char _pinG, unsigned char _pinB, bool _active_low);
     ~RGBstrip();
-    void set_on(bool _on);
+    void set_on(unsigned int _on);
     void set_hue(unsigned int _hue);
     void set_saturation(unsigned int _saturation);
     void set_brightness(unsigned int _brightness);
@@ -27,6 +27,13 @@ class RGBstrip
     void set_blue(unsigned int _blue);
     void set_rgb(unsigned int _red, unsigned int _green, unsigned int _blue);
     void set_hsv(unsigned int _red, unsigned int _green, unsigned int _blue);
+
+    unsigned int get_on();
+    unsigned int invert_on();
+    unsigned int get_hue();
+    unsigned int get_saturation();
+    unsigned int get_brightness();
+
     void check();
 };
 
