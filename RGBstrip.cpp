@@ -128,6 +128,11 @@ unsigned int RGBstrip::scale8to10bit(unsigned int in)
   return round(in*1023.0/255.0);
 }
 
+void RGBstrip::set(unsigned int _on)
+{
+  set_on(_on);
+}
+
 void RGBstrip::set_on(unsigned int _on)
 {
   if (_on==0)
@@ -196,6 +201,11 @@ void RGBstrip::set_hsv(unsigned int _hue, unsigned int _saturation, unsigned int
   set_hue(_hue);
   set_saturation(_saturation);
   set_brightness(_brightness);
+}
+
+unsigned int RGBstrip::get()
+{
+  return get_on();
 }
 
 unsigned int RGBstrip::get_on()

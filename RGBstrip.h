@@ -18,6 +18,7 @@ class RGBstrip
     RGBstrip(unsigned char _pinR, unsigned char _pinG, unsigned char _pinB);
     RGBstrip(unsigned char _pinR, unsigned char _pinG, unsigned char _pinB, bool _active_low);
     ~RGBstrip();
+    void set(unsigned int _on); // Compatibility with SignalLED for WiHome use case
     void set_on(unsigned int _on);
     void set_hue(unsigned int _hue);
     void set_saturation(unsigned int _saturation);
@@ -28,6 +29,7 @@ class RGBstrip
     void set_rgb(unsigned int _red, unsigned int _green, unsigned int _blue);
     void set_hsv(unsigned int _red, unsigned int _green, unsigned int _blue);
 
+    unsigned int get(); // Compatibility with SignalLED for WiHome use case
     unsigned int get_on();
     unsigned int invert_on();
     unsigned int get_hue();
